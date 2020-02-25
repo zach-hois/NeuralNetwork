@@ -1,5 +1,5 @@
 [![Build
-Status](https://travis-ci.org/miriam-goldman/Final_Project_Skeleton.svg?branch=master)](https://travis-ci.org/miriam-goldman/Final_Project_Skeleton)
+Status](https://travis-ci.org/zach-hois/NeuralNetwork.svg?branch=master)](https://travis-ci.org/zach-hois/NeuralNetwork)
 
 Example python project with testing.
 
