@@ -61,6 +61,13 @@ Show effectiveness on (minimize the difference between input and output):
 00000010
 00000001
 
+# 4. Evaluation
+
+1) How will I evaluate my training function? (loss function)
+2) What is my dataset made of? Is my data set balanced?
+3) What am I holding out? What am I keeping in? How do I pick my model?
+
+K folds verification
 
 
 
