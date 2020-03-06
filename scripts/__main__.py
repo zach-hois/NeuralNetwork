@@ -1,26 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt # to plot error during training
-from NN import NeuralNetwork, oneHot
+import pandas as pd
+from .NN import * 
+from .AutoEncoder import *
 
-#this is the training set for the 8 x 3 x 8 
-x = np.array([[1,0,0,0,0,0,0,0], #input
-			 [0,1,0,0,0,0,0,0],
-			 [0,0,1,0,0,0,0,0],
-			 [0,0,0,1,0,0,0,0],
-			 [0,0,0,0,1,0,0,0],
-			 [0,0,0,0,0,1,0,0],
-			 [0,0,0,0,0,0,1,0],
-			 [0,0,0,0,0,0,0,1]])
-y = np.array([[1,0,0,0,0,0,0,0], #output
-			 [0,1,0,0,0,0,0,0],
-			 [0,0,1,0,0,0,0,0],
-			 [0,0,0,1,0,0,0,0],
-			 [0,0,0,0,1,0,0,0],
-			 [0,0,0,0,0,1,0,0],
-			 [0,0,0,0,0,0,1,0],
-			 [0,0,0,0,0,0,0,1]])
+testData = pd.read_csv("./data/rap1-lieb-test.txt", sep = "\t", names=['seq'])
+print(testData)
+positiveData = pd.read_csv("./data/rap1-lieb-positives.txt", sep = "\t", names = ['seq'])
+print(positiveData)
 
-NN = NeuralNetwork(x,y) #create the neural net
+"""
+NN = [[]]
+NN = NeuralNetwork(NN, x,y) #create the neural net
 NN.train() #train it for 25k iterations
 
 test1 = np.array()
@@ -34,3 +25,5 @@ plt.plot(NN.epoch_list, NN.error_history)
 plt.xlabel('Epoch')
 plt.ylabel('Error')
 plt.show()
+"""
+

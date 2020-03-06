@@ -25,7 +25,7 @@ def test_encoder():
 
 	outputW1, outputW2 = AutoEncoder.backprop(x=test, y=testY, layer1=testLayer1, layer2=testLayer2, weight1=testWeight1, weight2=testWeight2, a=1)
 
-	assert outputW1.all() == np.ones((2,2)).all() #hows the output weight?
+	assert outputW1.all() == np.ones((2,2)).all() #True? same as before?
 
 #def test_encoder_relu():
 

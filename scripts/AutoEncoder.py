@@ -16,8 +16,8 @@ def forward(x, weight1, weight2):
 	#forward propogation
 	#takes sequence data as an input along with random weights
 	#returns transformed values (second is predictions from the model)
-	layer1 = sigmoid(np.dot(x, w1)) 
-	layer2 = sigmoid(np.dow(layer1, w2)) #the output
+	layer1 = sigmoid(np.dot(x, weight1)) 
+	layer2 = sigmoid(np.dot(layer1, weight2)) #the output
 	return layer1, layer2
 
 def backprop(x, y, layer1, layer2, weight1, weight2, a):

@@ -17,7 +17,7 @@ class NeuralNetwork:
     	self.error_history = [] #initializations
     	self.epoch_list = []
 
-    def make_weights(self):
+    #def make_weights(self):
     def sigmoid(self, x, deriv = False): #the activation function 
     	if deriv == True:
     		return x * (1-x)
@@ -43,5 +43,5 @@ class NeuralNetwork:
     	return prediction
 
 
-def activation(x):
+#def activation(x):
     
