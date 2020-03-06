@@ -27,7 +27,7 @@ def test_encoder():
 
 	assert outputW1.all() == np.ones((2,2)).all() #hows the output weight?
 
-def test_encoder_relu():
+#def test_encoder_relu():
 
 
-def test_one_d_ouput():
+#def test_one_d_ouput():
