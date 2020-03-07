@@ -4,26 +4,16 @@ import pandas as pd
 from .NN import * 
 from .AutoEncoder import *
 
+#first importing all of the data sets we will need to use
 testData = pd.read_csv("./data/rap1-lieb-test.txt", sep = "\t", names=['seq'])
-print(testData)
-positiveData = pd.read_csv("./data/rap1-lieb-positives.txt", sep = "\t", names = ['seq'])
-print(positiveData)
+#print(testData)
+positives = pd.read_csv("./data/rap1-lieb-positives.txt", sep = "\t", names = ['seq'])
+#print(positiveData)
+positives['resp'] = [1] * len(positives) #true positives
 
-"""
-NN = [[]]
-NN = NeuralNetwork(NN, x,y) #create the neural net
-NN.train() #train it for 25k iterations
+###################come back to this .. 
+#upsteam = 
 
-test1 = np.array()
-test2 = np.array()
 
-print(NN.predict(test1), '- Correct: ', test1[0][0])
-print(NN.predict(test2), '- Correct: ', test2[0][0])
-
-plt.figure(figsize=(15,5))
-plt.plot(NN.epoch_list, NN.error_history)
-plt.xlabel('Epoch')
-plt.ylabel('Error')
-plt.show()
-"""
+#going to split the dataset into 70% for training and 30% for testing
 
