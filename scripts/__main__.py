@@ -6,6 +6,8 @@ from .AutoEncoder import *
 from .validationEvaluation import *
 from preprocessing import *
 from sklearn import metrics
+from sklearn.model_selection import train_test_split
+from scipy import stats
 
 #first importing all of the data sets we will need to use
 testData = pd.read_csv("./data/rap1-lieb-test.txt", sep = "\t", names=['seq'])
