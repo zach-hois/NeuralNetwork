@@ -3,7 +3,7 @@ import pandas as pd
 from Bio import SeqIO, pairwise2 #we will use this for easy seq alignment
 
 def scoreAlignment(positive, negative): #we will find the scores that are closely aligned to true negatives
-	output = np.zeros((len(neg), len(pos))) #initialize our output matrix
+	output = np.zeros((len(negative), len(positive))) #initialize our output matrix
 	for n in range(output.shape[0]):
 		for p in range(output.shape[1]): #run this through the entire matrix
 			align = pairwise2.align.localms(positive.loc[p, 'seq'], negative[n].seq, 5, -4, -3, -0.1)

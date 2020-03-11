@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt # to plot error during training
 
 def architecture(inputSize = 8, compressionSize = 3, outputSize = 8):
 	# first making the neural net architecture the 8 x 3 x 8 as requires

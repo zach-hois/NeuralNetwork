@@ -111,11 +111,11 @@ def optimalParameters(XTrain, yTrain, iterations, a):
 #finally we will use the previously computed model dictionary and test data
 # to ensemble mdoel and then appropriately weight
 def ensembleM(modelDict, testData):
-	predDF = pd.DataFrame() #initialize the prediction data frame
-	for i in range(len(modelDict['data'])):
-		layer1, pred = forward(testData, weight1 = modelDict['weights'][i][0], weight2=modelDict['weights'][i][1])
-		predDF = pd.concat([predDF, pd.DataFrame({i: pred[:,0]})], axis=1) #add to DF
-    predDF['ensemble'] = predDF.mean(axis=1) #average pred
+    predDF = pd.DataFrame() #initialize the prediction data frame
+    for i in range(len(modelDict['data'])):
+        layer1, pred = forward(testData, weight1 = modelDict['weights'][i][0], weight2=modelDict['weights'][i][1])
+        predDF = pd.concat([predDF, pd.DataFrame({i: pred[:,0]})], axis=1) #add to DF
+    predDF['ensemble'] = predDF.mean(axis=1)
     return predDF
 
 #last required part, weights for this
@@ -130,6 +130,19 @@ def ensembleW(modelDict, testData):
 	layer1, pred = forward(testData, weight1=weight1, weight2=weight2)
 	return pred
 
+def parseFasta(filename): #This is used to take just the sequence from the fasta document
+    seq = ""
+    with open(filename) as fh:
+        for line in fh:
+            if line.startswith(">"):
+                continue
+            seq += line.strip()
+    return seq
 
+def pairs(filename):
+    with open(filename) as fh:
+        for line in fh:
+            line = line.strip().split()
+            yield line[0], line[1]    
 
 
