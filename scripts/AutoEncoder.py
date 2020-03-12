@@ -28,7 +28,7 @@ def backprop(x, y, layer1, layer2, weight1, weight2, a):
 	dLoss = 2 * (y-layer2) #derivative of loss Mean Squared Error 
 	dActivation = sigmoid(layer2, deriv = True) #activation derivative
 
-	deltaWeight2 = np.dot(layer1.T, (dLoss * dActivation)) #chain rule
+	deltaWeight2 = np.dot(layer2.T, (dLoss * dActivation)) #chain rule
 
 	#backwards 1 layer
 	dHidden = np.dot((dLoss * dActivation), weight2.T)
@@ -37,6 +37,9 @@ def backprop(x, y, layer1, layer2, weight1, weight2, a):
 	#update the weights with the dLoss
 	weight1 += a * deltaWeight1
 	weight1 += a * deltaWeight2
+
+	# weight1 += deltaWeight1
+	# weight1 += deltaWeight2
 
 	return weight1, weight2 #return the new weights
 
@@ -47,6 +50,13 @@ def NeuralNetwork(x, y, hidden, iterations=100, a=1):
 	i = 0
 	while i < iterations:
 		layer1, layer2 = forward(x=x, weight1=weight1, weight2=weight2)
-		weight1, weight2 = backprop(x=x, y=y, l1=l1, l2=l2, weight1=weight1, weight2 = weight2, a=a)
+		# weight1, weight2 = backprop(x=x, y=y, l1=l1, l2=l2, weight1=weight1, weight2 = weight2, a=a)
+		weight1, weight2 = backprop(x=x, y=y, layer1=layer1, layer2=layer2, weight1=weight1, weight2 = weight2, a=a)
+
 		i +=1 
-	return l2, w1, w2
+
+	return layer2, weight1, weight2
+
+
+
+

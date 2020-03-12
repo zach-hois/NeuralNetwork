@@ -5,6 +5,7 @@ import pandas as pd
 from .AutoEncoder import *
 from .validationEvaluation import *
 from .preprocessing import *
+from .processing import *
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from scipy import stats
@@ -14,29 +15,35 @@ from Bio import SeqIO
 testData = pd.read_csv("./data/rap1-lieb-test.txt", sep = "\t", names=['seq'])
 #print(testData)
 positives = pd.read_csv("./data/rap1-lieb-positives.txt", sep = "\t", names = ['seq'])
-print(positives)
+pos2 = list(positives['seq'])
+
 positives['resp'] = [1] * len(positives) #true positives
 
+
+
 #parsing the upstream negative fasta
-negatives = parseFasta("./data/yeast-upstream-1k-negative.fa")
-#print(negatives)
-scoreAlignment(positives, negatives)
+neg_list = []
+negs = generate_negative_samples("./data/yeast-upstream-1k-negative.fa",17,137,pos2)
+for x in negs:
+	# print(x)
+	neg_list.append(x)
 
-negatives = negativeSplit(negatives)
-
+negatives2 = pd.DataFrame(neg_list,columns=['seq'])
+negatives2['resp'] = [0] * len(negatives2)
+# print(negatives2)
 ###################come back to this .. 
 #upsteam = 
-
+# negatives = negativeSplit2(neg_list)
 
 #going to split the dataset into 70% for training and 30% for testing
 #as suggested by the repo there are 500 iterations at an alpha of 0.0001, 6 hidden neurons
 
-x, y = dataPreparation(neg=negatives, pos=positives, nNeg = 137, nPos = 137) #sample our data
+x, y = dataPreparation(neg=negatives2, pos=positives, nNeg = 137, nPos = 137) #sample our data
 XTrain, XTest, yTrain, yTest = train_test_split(x, y, test_size = 0.3, random_state = 1231) #sklearn, train test
 yTrain = np.reshape(yTrain, (-1, 1))
 yTest = np.reshape(yTest, (-1, 1)) #reshape them
 
-base, baseW1, baseW2, = NeuralNetwork(x=XTrain, y=yTrain, hidden=6, iterations = 500, alpha = 0.001) #make the network
+base, baseW1, baseW2, = NeuralNetwork(x=XTrain, y=yTrain, hidden=6, iterations = 500, a = 0.001) #make the network
 layer1, basePredictions = forward(XTest, baseW1, baseW2)
 
 fpr, tpr, thresholds = metrics.roc_curve(yTrain[:,0], base[:,0], pos_label = 1) #y true, y score, and pos label. baseline AUROC

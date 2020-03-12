@@ -22,6 +22,9 @@ def negativeSplit(negative): #this will make an array of the negative sequences
 		for i in range(length, len(negative[n].seq)):
 			seq = negative[n].seq[i - length: i + 1] #select the sequence
 			sequences.append(str(seq))#keep them here
+
+
+
 		ID = [n] * len(sequences) #sequence ID initialization
 		seqID = [negative[n].id] * len(sequences)
 		resp = [0] * len(sequences) #our response variable
@@ -32,3 +35,27 @@ def negativeSplit(negative): #this will make an array of the negative sequences
 			"resp": resp}) #put all of these pieces of data into one frame
 		output = output.append(dfIteration) #and append to the dataframe for output
 	return output.reset_index(drop = True) #return out output	
+
+def negativeSplit2(negative): #this will make an array of the negative sequences
+	output = pd.DataFrame()
+
+	for n in range(len(negative)):
+		#split them all into strings that overlap
+		length = 17
+		sequences = negative
+		
+		ID = [n] * len(sequences) #sequence ID initialization
+		seqID = [negative[n].id] * len(sequences)
+		resp = [0] * len(sequences) #our response variable
+		dfIteration = pd.DataFrame({
+			"ID": ID,
+			"seqID": seqID,
+			"sequences":sequences,
+			"resp": resp}) #put all of these pieces of data into one frame
+		output = output.append(dfIteration) #and append to the dataframe for output
+	return output.reset_index(drop = True) #return out output	
+
+
+
+
+

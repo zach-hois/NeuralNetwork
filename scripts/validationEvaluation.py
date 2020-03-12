@@ -6,8 +6,8 @@ from sklearn import metrics
 def dataPreparation(neg, pos, nNeg, nPos):
 	#combining the negative and positive sequences and oneHot encode the features
 
-	trainNeg = neg.sample(n = nNeg, randomState = 100)
-	pos = pos.sample(n = nPos, randomState = 100) #sample the data
+	trainNeg = neg.sample(n = nNeg)#, randomState = 100)
+	pos = pos.sample(n = nPos)#, randomState = 100) #sample the data
 
 	#data combination
 	X = pd.concat([trainNeg, pos], ignore_index = True) #independent variable
