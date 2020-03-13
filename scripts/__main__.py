@@ -70,7 +70,7 @@ Shown above is an example of the input data for the XTraining set. It uses oneho
 assigning a probability of each base pair appearing at each point in the 17 nucleotide sequence
 for the positive and negative sets
 """
-
+"""
 base, baseW1, baseW2, = NeuralNetwork(x=XTrain, y=yTrain, hidden=6, iterations = 500, a = 0.001) #make the network
 layer1, basePredictions = forward(XTest, baseW1, baseW2)
 
@@ -95,21 +95,22 @@ plt.ylabel('True Positive Rate')
 plt.title('Training and Test ROC')
 plt.legend(loc="lower right")
 #plt.show() #screenshot it
+"""
 
 #next i will graph the k folds cross validation technique performance 
 #the positives are samples with replacement but only 32 are ultimately used
 #this is compared againse 3200 negatives, this shows how well the model holds to generalization (100:1 ratio)
 
 kfoldsPOS = positives.sample(3200, replace = True)
-"""
-outputDict = kfold(negatives2, kfoldsPOS, k = 10, nNeg = 3200, nPos = 32, iterations = 1000, alpha = 0.0001)
+
+outputDict = kfold(negatives2, kfoldsPOS, k = 10, nNeg = 3200, nPos = 32, iterations = 500, alpha = 0.0001)
 colors = ("blue", "green", "red", "cyan", "magenta", "yellow", "black", "white", "violet", "chartreuse") # 10 curves
 
 plt.figure() #plot the ROC curve
-
+k=10
 for i, c in zip(range(k), colors):
 	plt.plot(outputDict['fpr'][i], outputDict['tpr'][i], color=c, lw = 2, 
-		label = '{0} AUROC = {1:0.2f}, Accuracy = {1:0.2f}' ''.format(i, outputDict['auc'][i], outputDict[accuracy][i]))
+		label = '{0} AUROC = {1:0.2f}, Accuracy = {1:0.2f}' ''.format(i, outputDict['auc'][i], outputDict['accu'][i]))
 
 plt.plot([0,1], [0,1], color = "black", lw=2, linestyle = '--', label = 'Baseline')
 plt.xlim([0.0, 1.0])
@@ -119,7 +120,7 @@ plt.ylabel('True Positive Rate')
 plt.title('KFolds Cross Validation AUROC 100:1 Negative to Positive')
 plt.legend(loc="lower right")
 plt.show() #screenshot it
-"""
+
 
 #Next use ensembling methods to reduce variance
 # We could take the average unseen data predictions for each k folds model and average these prediction 
@@ -174,9 +175,11 @@ plt.show() #screenshot it
 
 
 # final predictions model, repeat what was done above
+"""
 predictionPOS = positives.sample(10000, replace = True)
 predictDict = kfold(negatives2, predictionPOS, k = 10, nNeg = 10000, nPos = 10000, iterations = 10000, alpha = 0.0003)
 testDatax = testData['seq'].apply(lambda x: pd.Series(list(x)))
+"""
 testDatax = pd.get_dummies(pd.DataFrame(testData))
 Emodel = ensembleM(predictDict, testDatax)
 finalPredictions = pd.DataFrame({'seq': testData['seq'], 'EModel':Emodel['ensemble'].values})

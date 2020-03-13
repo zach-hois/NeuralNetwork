@@ -22,7 +22,7 @@ def split(neg, pos, k, nNeg, nPos): #simple data split function
 	splitNeg = [0] * k
 	splitPos = [0] * k
 	for i in range(k):
-		splitNeg[i] = neg.sample(n=nNeg, replace = True) #data grab
+		splitNeg[i] = neg.sample(n=nNeg, replace=True) #data grab
 		splitPos[i] = pos.sample(n=nPos)
 	return splitNeg, splitPos
 
@@ -130,6 +130,19 @@ def ensembleW(modelDict, testData):
 	weight2 = weight2 / len(modelDict['data']) #normalize
 	layer1, pred = forward(testData, weight1=weight1, weight2=weight2)
 	return pred
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def parseFasta(filename): #This is used to take just the sequence from the fasta document
     seq = ""
