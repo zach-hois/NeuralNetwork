@@ -22,7 +22,7 @@ def split(neg, pos, k, nNeg, nPos): #simple data split function
 	splitNeg = [0] * k
 	splitPos = [0] * k
 	for i in range(k):
-		splitNeg[i] = neg.sample(n=nNeg) #data grab
+		splitNeg[i] = neg.sample(n=nNeg, replace = True) #data grab
 		splitPos[i] = pos.sample(n=nPos)
 	return splitNeg, splitPos
 
@@ -46,6 +46,7 @@ def kfold(neg, pos, k, nNeg, nPos, iterations, alpha): #begin the function!
                'accu': accu, 'data': data} #this will be out output dictionary
     splitsNeg, splitsPos = split(neg, pos, k, nNeg=nNeg, nPos=nPos) #use the function we just wrote to store the splits
     for i in range(k): #remove one group from the training set for validation
+        print(i)
         arr = np.array(range(k)) #everything except i array
 
         mask = np.ones(arr.shape, dtype=bool)

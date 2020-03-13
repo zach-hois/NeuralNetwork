@@ -70,4 +70,17 @@ Show effectiveness on (minimize the difference between input and output):
 K folds verification
 
 
+@channel Rubric for Final Project
+1. Reconstruct an 8x8 identity matrix with an autoencoder with 3 hidden neurons. (4 points) @@@@@
+2. Develop a fully connected neural network that predicts transcription factor binding with the training data provided.
+- Describe and implement a data preprocessing approach. (1 point) @@@@@
+- Describe and implement a way to represent DNA sequence. (1 point) @@@@@
+- Develop and describe your network architecture (1 point) @@@@@
+3. Develop a training regime (K-fold cross validation, bagging, etc) to test model performance. @@@@@
+- Describe and implement the regime and answer question 3 subquestions (1.5 point) @@@@@
+4. Perform cross-validation experiments to test model hyperparameters. (1 point) @@@@@
+Develop and describe your choice of model hyperparameters 
+	Answer question 4 questions
+5. Test model performance on the test dataset provided. (0.5) 
+
 
