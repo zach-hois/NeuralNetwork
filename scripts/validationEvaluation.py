@@ -22,7 +22,7 @@ def split(neg, pos, k, nNeg, nPos): #simple data split function
 	splitNeg = [0] * k
 	splitPos = [0] * k
 	for i in range(k):
-		splitNeg[i] = neg.sample(n=nNeg, replace=True) #data grab
+		splitNeg[i] = neg.sample(n=nPos, replace=True) #data grab
 		splitPos[i] = pos.sample(n=nPos)
 	return splitNeg, splitPos
 

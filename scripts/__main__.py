@@ -11,6 +11,7 @@ from sklearn.model_selection import train_test_split
 from scipy import stats
 from Bio import SeqIO
 
+
 #first importing all of the data sets we will need to use
 testData = pd.read_csv("./data/rap1-lieb-test.txt", sep = "\t", names=['seq'])
 #print(testData)
@@ -70,7 +71,7 @@ Shown above is an example of the input data for the XTraining set. It uses oneho
 assigning a probability of each base pair appearing at each point in the 17 nucleotide sequence
 for the positive and negative sets
 """
-"""
+
 base, baseW1, baseW2, = NeuralNetwork(x=XTrain, y=yTrain, hidden=6, iterations = 500, a = 0.001) #make the network
 layer1, basePredictions = forward(XTest, baseW1, baseW2)
 
@@ -95,7 +96,7 @@ plt.ylabel('True Positive Rate')
 plt.title('Training and Test ROC')
 plt.legend(loc="lower right")
 #plt.show() #screenshot it
-"""
+
 
 #next i will graph the k folds cross validation technique performance 
 #the positives are samples with replacement but only 32 are ultimately used
@@ -125,18 +126,18 @@ plt.show() #screenshot it
 #Next use ensembling methods to reduce variance
 # We could take the average unseen data predictions for each k folds model and average these prediction 
 # Or Take the average weights of the k folds cross validation and make a "best" weight
-"""
-trainNeg = negatives2.sample(n=5000)
+
+trainNeg = negatives2.sample(n=500, replace = True)
 trainPos = positives.iloc[1:101,:]
-trainPos = trainPos.sample(n=5000, replace = True)
-testNeg = negatives2.sample(n=3200, replace=True) #negatives can be resampled because they dont need to be specific
+trainPos = trainPos.sample(n=500, replace = True)
+testNeg = negatives2.sample(n=320, replace=True) #negatives can be resampled because they dont need to be specific
 testPos = positives.iloc[101:138,:] #keeping out some of the data for testing
 
 
 ensDict = kfold(trainNeg, trainPos, k = 10, nNeg = len(trainNeg), nPos = len(trainPos), iterations = 1000, alpha = 0.0001)
 
 testData = pd.concat([testNeg, testPos], axis = 0)
-testData = testdata.sample(frac=1)
+testData = testData.sample(frac=1)
 testDatax = testData['seq'].apply(lambda x: pd.Series(list(x)))
 testDatax = pd.get_dummies(pd.DataFrame(testData))
 
@@ -170,8 +171,6 @@ plt.ylabel('True Positive Rate')
 plt.title('Ensembles')
 plt.legend(loc="lower right")
 plt.show() #screenshot it
-"""
-
 
 
 # final predictions model, repeat what was done above
@@ -186,7 +185,5 @@ finalPredictions = pd.DataFrame({'seq': testData['seq'], 'EModel':Emodel['ensemb
 finalPredictions = finalPredictions[['seq', 'mod']]
 finalPredictions.to_csv("./HOISINGTONPredictions.txt", sep = "\t", index=False, header=False)
 
-
-
-
+#not super confident (read: at all confident) in the predictions because I do not think the Emodel and WModel worked as I planned
 
