@@ -1,5 +1,8 @@
-from scripts import NN
+from scripts import NeuralNetwork
 from scripts import AutoEncoder
+from scripts import validationEvaluation
+from scripts import processing
+
 import numpy as np
 
 
@@ -40,8 +43,3 @@ def test_encoder():
 	outputW1, outputW2 = AutoEncoder.backprop(x=test, y=testY, layer1=testLayer1, layer2=testLayer2, weight1=testWeight1, weight2=testWeight2, a=1)
 
 	assert outputW1.all() == np.ones((8,8)).all() #True? same as before?
-
-#def test_encoder_relu():
-
-
-#def test_one_d_ouput():
