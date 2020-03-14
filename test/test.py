@@ -1,4 +1,3 @@
-from scripts import NeuralNetwork
 from scripts import AutoEncoder
 from scripts import validationEvaluation
 from scripts import processing
